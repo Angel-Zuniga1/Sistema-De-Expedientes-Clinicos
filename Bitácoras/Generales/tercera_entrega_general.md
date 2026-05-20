@@ -52,3 +52,17 @@ En comparación con la segunda entrega, la tercera consolidó el proyecto como u
 Durante la tercera entrega se completaron todas las tareas asignadas al equipo. La única actividad que inicialmente quedó fuera de tiempo en la primera semana fue posteriormente concluida, por lo que al cierre de la entrega todo el trabajo planificado quedó realizado.
 
 En conjunto, la tercera entrega deja definidos los elementos clave del sistema: arquitectura, tecnologías, modelo de datos, clases, reglas de negocio, auditoría, API REST y diagramas de secuencia para los flujos principales. Esto consolida una base documental sólida para avanzar hacia la implementación y validación del sistema.
+
+## Tabla de participación final (tercera entrega)
+
+La tabla siguiente resume la participación calculada a partir de las tablas semanales incluidas en la bitácora de la tercera entrega. Los totales se normalizan para mostrar la participación relativa durante el periodo de la entrega.
+
+| Nombre del integrante   | Total puntos (suma %) | Participación final (%) |
+|-------------------------|-----------------------:|------------------------:|
+| Christopher May         | 60                    | 21.4%                   |
+| Ángel Zúñiga            | 60                    | 21.4%                   |
+| Mijail Manrique         | 60                    | 21.4%                   |
+| Mauricio De lázaro      | 60                    | 21.4%                   |
+| Adrián Chuc             | 40                    | 14.3%                   |
+
+Nota: Los "puntos" son la suma de los porcentajes semanales reportados en [tercera_entrega_semanal.md](../Semanales/tercera_entrega_semanal.md) para cada integrante y se normalizaron para obtener la participación relativa durante la tercera entrega.
