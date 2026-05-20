@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrador — Expedientes Clínicos</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-brand">
+      <div class="topbar-logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h1>Expedientes Clínicos</h1>
+      <span class="role-tag">ADMINISTRADOR</span>
+    </div>
+    <div class="topbar-user">
+      <button class="topbar-logout" onclick="auth.logout()">Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="container">
+
+    <div class="tabs" id="adminTabs">
+      <button class="tab active" data-tab="tabPacientes">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        Pacientes
+      </button>
+      <button class="tab" data-tab="tabUsuarios">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        Usuarios
+      </button>
+      <button class="tab" data-tab="tabAuditoria">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        Auditoría
+      </button>
+    </div>
+
+    <!-- TAB 1: Pacientes -->
+    <div class="tab-content active" id="tabPacientes">
+      <div id="panelPacientes">
+        <div class="card"><div class="card-body">
+          <div class="empty-state" style="padding:3rem 2rem;">
+            <span class="spinner"></span>
+            <p style="margin-top:1rem;">Cargando pacientes...</p>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Usuarios -->
+    <div class="tab-content" id="tabUsuarios">
+      <div id="panelUsuarios">
+        <div class="card"><div class="card-body">
+          <div class="empty-state" style="padding:3rem 2rem;">
+            <div class="empty-icon">
+              <svg width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <p>Selecciona la pestaña para cargar los usuarios</p>
+          </div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Auditoría -->
+    <div class="tab-content" id="tabAuditoria">
+      <div class="card">
+        <div class="card-header">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <h2>Registros de Auditoría</h2>
+            <span id="countAuditoria" style="font-size:0.8rem;color:#94A3B8;"></span>
+          </div>
+          <div style="display:flex;gap:0.625rem;align-items:center;">
+            <button type="button" class="filter-reset" id="btnLimpiarAuditoria">Limpiar filtros</button>
+            <button class="btn btn-primary btn-sm" id="btnBuscarAuditoria">Buscar</button>
+          </div>
+        </div>
+        <div class="card-body" style="padding-bottom:0;">
+          <div class="filters">
+            <div class="form-group">
+              <label for="aBuscarUsuario">Usuario</label>
+              <div class="autocomplete-wrap">
+                <input type="text" id="aBuscarUsuario" placeholder="Nombre del profesional..." autocomplete="off" style="min-width:220px;" />
+                <div class="autocomplete-list" id="aBuscarUsuarioList"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="aFechaDesde">Desde</label>
+              <input type="text" id="aFechaDesde" placeholder="Desde..." readonly />
+            </div>
+            <div class="form-group">
+              <label for="aFechaHasta">Hasta</label>
+              <input type="text" id="aFechaHasta" placeholder="Hasta..." readonly />
+            </div>
+            <div class="form-group">
+              <label for="aAccion">Acción</label>
+              <select id="aAccion" style="min-width:190px;">
+                <option value="">Todas</option>
+                <option>CONSULTAR_EXPEDIENTE</option>
+                <option>MODIFICAR_EXPEDIENTE</option>
+                <option>CAMBIAR_ESTADO_EXPEDIENTE</option>
+                <option>REGISTRAR_ENTREVISTA</option>
+                <option>REGISTRAR_CONSENTIMIENTO</option>
+                <option>REGISTRAR_REPORTE</option>
+                <option>MODIFICAR_REPORTE</option>
+                <option>ENVIAR_REPORTE</option>
+                <option>APROBAR_REPORTE</option>
+                <option>RECHAZAR_REPORTE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="aResultado">Resultado</label>
+              <select id="aResultado" style="min-width:120px;">
+                <option value="">Todos</option>
+                <option>PERMITIDO</option>
+                <option>DENEGADO</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id="auditoriaResultado">
+          <div class="empty-state" style="padding:2.5rem 2rem;">
+            <div class="empty-icon">
+              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>
+              </svg>
+            </div>
+            <p>Aplica filtros y presiona <strong>Buscar</strong> para ver los registros</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal: Editar Documento -->
+<div class="modal-overlay" id="modalEditarDoc">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalEditarDocTitulo"></h3>
+      <button class="btn-close" onclick="closeModal('modalEditarDoc')" aria-label="Cerrar">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <!-- Campos Entrevista Socioeconómica -->
+      <div id="editEntrevistaFields" style="display:none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ingreso familiar <span class="req">*</span></label>
+            <input type="number" id="editIngreso" min="0" step="0.01" placeholder="Ej. 8500.00" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label>Gasto alimentación <span class="req">*</span></label>
+            <input type="number" id="editGasto" min="0" step="0.01" placeholder="Ej. 2000.00" autocomplete="off" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Lugar de procedencia <span class="req">*</span></label>
+          <input type="text" id="editLugar" maxlength="100" placeholder="Ciudad, Estado" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label>Vivienda</label>
+          <textarea id="editVivienda" rows="2" maxlength="1000" placeholder="Tipo, condiciones..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Estado de salud familiar <span class="req">*</span></label>
+          <input type="text" id="editSalud" maxlength="50" placeholder="Ej. Sin enfermedades crónicas" autocomplete="off" />
+        </div>
+      </div>
+      <!-- Campos Consentimiento Informado -->
+      <div id="editConsentimientoFields" style="display:none;">
+        <div class="form-group">
+          <label>Cuerpo del texto <span class="req">*</span></label>
+          <textarea id="editCuerpo" rows="4" maxlength="2000" placeholder="Texto del acuerdo de tratamiento..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Acuerdo de confidencialidad <span class="req">*</span></label>
+          <textarea id="editAcuerdo" rows="3" maxlength="1000" placeholder="Cláusulas de confidencialidad..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div id="mslEditarDoc" class="modal-status-line"></div>
+      <button class="btn btn-secondary" onclick="closeModal('modalEditarDoc')">Cancelar</button>
+      <button class="btn btn-primary" id="btnGuardarEdicion">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Ver Documento -->
+<div class="modal-overlay" id="modalVerDocumento">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalVerDocTitulo"></h3>
+      <button class="btn-close" onclick="closeModal('modalVerDocumento')" aria-label="Cerrar">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <div id="modalVerDocCuerpo"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modalVerDocumento')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script>
+auth.guard();
+</script>
+<script src="js/administrador.js"></script>
+<script>
+/* Guardar edición de documento */
+document.getElementById('btnGuardarEdicion').addEventListener('click', async function () {
+  var btn = this;
+  var msl = document.getElementById('mslEditarDoc');
+  var body, url;
+
+  if (tipoDocEditar === 'entrevista') {
+    var ingreso  = document.getElementById('editIngreso').value.trim();
+    var gasto    = document.getElementById('editGasto').value.trim();
+    var lugar    = document.getElementById('editLugar').value.trim();
+    var vivienda = document.getElementById('editVivienda').value.trim();
+    var salud    = document.getElementById('editSalud').value.trim();
+    if (!ingreso || !gasto || !lugar || !salud) {
+      msl.textContent = 'Completa todos los campos obligatorios';
+      msl.className = 'modal-status-line msl-error';
+      return;
+    }
+    body = { ingresoFamiliar: parseFloat(ingreso), gastoAlimentacion: parseFloat(gasto),
+             lugarProcedencia: lugar, vivienda: vivienda || null, estadoSaludFamiliar: salud };
+    url = '/expedientes/' + idExpedienteEditar + '/entrevista-socioeconomica';
+  } else {
+    var cuerpo  = document.getElementById('editCuerpo').value.trim();
+    var acuerdo = document.getElementById('editAcuerdo').value.trim();
+    if (!cuerpo || !acuerdo) {
+      msl.textContent = 'Completa todos los campos obligatorios';
+      msl.className = 'modal-status-line msl-error';
+      return;
+    }
+    body = { cuerpoDelTexto: cuerpo, acuerdoConfidencial: acuerdo };
+    url = '/expedientes/' + idExpedienteEditar + '/consentimiento';
+  }
+
+  msl.textContent = 'Guardando...';
+  msl.className = 'modal-status-line msl-loading';
+  setLoading(btn, true);
+  try {
+    await api.put(url, body);
+    closeModal('modalEditarDoc');
+    msl.textContent = '';
+    toast('Documento actualizado exitosamente', 'success');
+    await selectPaciente(idExpedienteEditar, null);
+  } catch (e) {
+    msl.textContent = e.message;
+    msl.className = 'modal-status-line msl-error';
+    setLoading(btn, false);
+  }
+});
+
+/* Limpiar filtros de auditoría */
+(function () {
+  document.getElementById('btnLimpiarAuditoria').addEventListener('click', function () {
+    ['aBuscarUsuario', 'aFechaDesde', 'aFechaHasta'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    if (typeof usuarioAuditoriaId !== 'undefined') usuarioAuditoriaId = null;
+    if (typeof logsMaster !== 'undefined') logsMaster = [];
+    if (window._fpDesde) window._fpDesde.clear();
+    if (window._fpHasta) window._fpHasta.clear();
+    ['aAccion', 'aResultado'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { el.value = ''; el.dispatchEvent(new Event('change')); }
+    });
+    var countEl = document.getElementById('countAuditoria');
+    if (countEl) countEl.textContent = '';
+    document.getElementById('auditoriaResultado').innerHTML =
+      '<div class="empty-state" style="padding:2.5rem 2rem;">' +
+      '<div class="empty-icon"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">' +
+      '<line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/>' +
+      '</svg></div><p>Aplica filtros y presiona <strong>Buscar</strong> para ver los registros</p></div>';
+  });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+<script>
+(function () {
+  flatpickr.localize(flatpickr.l10ns.es);
+  var fpCfg = {
+    locale: 'es',
+    enableTime: true,
+    dateFormat: 'Y-m-dTH:i',
+    altInput: true,
+    altFormat: 'd/m/Y H:i',
+    time_24hr: true,
+    allowInput: false,
+    animate: true,
+    static: false,
+    disableMobile: true,
+  };
+  window._fpDesde = flatpickr('#aFechaDesde', fpCfg);
+  window._fpHasta = flatpickr('#aFechaHasta', fpCfg);
+})();
+</script>
+</body>
+</html>
