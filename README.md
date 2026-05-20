@@ -2,6 +2,10 @@
 
 Este proyecto se enfoca en el desarrollo de un módulo para la gestión de expedientes clínicos dentro de una clínica de psicología, como parte de un sistema más amplio. Su propósito principal es modernizar el manejo de la información de los pacientes mediante la digitalización de expedientes que actualmente se administran de forma física. A través de este módulo, se busca facilitar la consulta y gestión de la información clínica, permitiendo un acceso más ágil, organizado y seguro para el personal autorizado de la clínica.
 
+## Enlace del sistema
+
+[Sistema de Expedientes Clínicos](https://sistema-de-expedientes-clinicos-one.vercel.app/index.html)
+
 ## Estructura del repositorio (árbol)
 
 ```
