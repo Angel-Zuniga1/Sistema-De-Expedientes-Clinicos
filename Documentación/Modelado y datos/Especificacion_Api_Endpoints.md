@@ -584,7 +584,7 @@ PATCH /api/v1/reportes/{idReporte}/rechazar
 
 ## Módulo Administrador
 
-### CU-10 — Registrar expediente clínico
+### Registrar expediente clínico
 
 **RF-11**
 
@@ -684,7 +684,7 @@ PATCH /api/v1/expedientes/{idExpediente}/estado
 
 ---
 
-### CU-11 — Registrar entrevista socioeconómica
+### CU-10 — Registrar entrevista socioeconómica
 
 **RF-09**
 
@@ -748,7 +748,7 @@ POST /api/v1/expedientes/{idExpediente}/entrevista-socioeconomica
 
 ---
 
-### CU-12 — Registrar consentimiento informado
+### CU-11 — Registrar consentimiento informado
 
 **RF-10**
 
@@ -941,7 +941,7 @@ PUT /api/v1/expedientes/{idExpediente}/entrevista-socioeconomica
 | vivienda            | String  | No        | Máximo 1000 caracteres |
 | estadoSaludFamiliar | String  | Sí        | Máximo 50 caracteres |
 
-**Response 200 OK:** misma estructura que `POST` en CU-11.
+**Response 200 OK:** misma estructura que `POST` en CU-10.
 
 **Códigos de respuesta:**
 
@@ -984,7 +984,7 @@ PUT /api/v1/expedientes/{idExpediente}/consentimiento
 | cuerpoDelTexto      | String | Sí        | No vacío, máximo 2000 caracteres |
 | acuerdoConfidencial | String | Sí        | No vacío, máximo 1000 caracteres |
 
-**Response 200 OK:** misma estructura que `POST` en CU-12.
+**Response 200 OK:** misma estructura que `POST` en CU-11.
 
 **Códigos de respuesta:**
 
@@ -1083,7 +1083,7 @@ GET /api/v1/supervisores
 
 ## Módulo Auditoría
 
-> **Autorización formal:** La política de acceso a los registros de auditoría está definida en `Auditoria.md`, sección 6, y en `Requisitos_No_Funcionales.md` (RNF-10). Únicamente el rol `ADMINISTRADOR` puede consultar los registros; los roles `TERAPEUTA` y `SUPERVISOR` tienen acceso denegado. El requisito funcional correspondiente es RF-12 (caso de uso CU-13).
+> **Autorización formal:** La política de acceso a los registros de auditoría está definida en `Auditoria.md`, sección 6, y en `Requisitos_No_Funcionales.md` (RNF-10). Únicamente el rol `ADMINISTRADOR` puede consultar los registros; los roles `TERAPEUTA` y `SUPERVISOR` tienen acceso denegado. El requisito funcional correspondiente es RF-12 (caso de uso CU-17).
 
 ### Consultar registros de auditoría
 
@@ -1147,18 +1147,18 @@ GET /api/v1/auditoria
 | CU-07       | GET    | `/api/v1/reportes/{idReporte}`                                | `SUPERVISOR` · `TERAPEUTA`      |
 | CU-08       | PATCH  | `/api/v1/reportes/{idReporte}/aprobar`                        | `SUPERVISOR`                    |
 | CU-09       | PATCH  | `/api/v1/reportes/{idReporte}/rechazar`                       | `SUPERVISOR`                    |
-| CU-10       | POST   | `/api/v1/expedientes`                                         | `ADMINISTRADOR`                 |
+| —           | POST   | `/api/v1/expedientes`                                         | `ADMINISTRADOR`                 |
 | RNF-01      | PATCH  | `/api/v1/expedientes/{idExpediente}/estado`                   | `ADMINISTRADOR`                 |
-| CU-11       | POST   | `/api/v1/expedientes/{idExpediente}/entrevista-socioeconomica`| `ADMINISTRADOR`                 |
-| CU-12       | POST   | `/api/v1/expedientes/{idExpediente}/consentimiento`           | `ADMINISTRADOR`                 |
-| —           | GET    | `/api/v1/expedientes/pendientes-documentos`                   | `ADMINISTRADOR`                 |
-| —           | GET    | `/api/v1/expedientes/{idExpediente}/detalle-terapeuta`        | `TERAPEUTA` (ABAC)              |
-| —           | GET    | `/api/v1/expedientes/{idExpediente}/detalle-admin`            | `ADMINISTRADOR`                 |
-| —           | PUT    | `/api/v1/expedientes/{idExpediente}/entrevista-socioeconomica`| `ADMINISTRADOR`                 |
-| —           | PUT    | `/api/v1/expedientes/{idExpediente}/consentimiento`           | `ADMINISTRADOR`                 |
-| —           | GET    | `/api/v1/terapeutas`                                          | `ADMINISTRADOR`                 |
-| —           | GET    | `/api/v1/supervisores`                                        | `ADMINISTRADOR`                 |
-| Auditoría   | GET    | `/api/v1/auditoria`                                           | `ADMINISTRADOR`                 |
+| CU-10       | POST   | `/api/v1/expedientes/{idExpediente}/entrevista-socioeconomica`| `ADMINISTRADOR`                 |
+| CU-11       | POST   | `/api/v1/expedientes/{idExpediente}/consentimiento`           | `ADMINISTRADOR`                 |
+| CU-14       | GET    | `/api/v1/expedientes/pendientes-documentos`                   | `ADMINISTRADOR`                 |
+| CU-02       | GET    | `/api/v1/expedientes/{idExpediente}/detalle-terapeuta`        | `TERAPEUTA` (ABAC)              |
+| CU-14       | GET    | `/api/v1/expedientes/{idExpediente}/detalle-admin`            | `ADMINISTRADOR`                 |
+| CU-11       | PUT    | `/api/v1/expedientes/{idExpediente}/entrevista-socioeconomica`| `ADMINISTRADOR`                 |
+| CU-13       | PUT    | `/api/v1/expedientes/{idExpediente}/consentimiento`           | `ADMINISTRADOR`                 |
+| CU-15       | GET    | `/api/v1/terapeutas`                                          | `ADMINISTRADOR`                 |
+| CU-16       | GET    | `/api/v1/supervisores`                                        | `ADMINISTRADOR`                 |
+| CU-17       | GET    | `/api/v1/auditoria`                                           | `ADMINISTRADOR`                 |
 
 ---
 
@@ -1191,8 +1191,8 @@ Cada acción de la tabla siguiente corresponde a un valor del ENUM `accion` en `
 | `CONSULTAR_EXPEDIENTE`            | CU-02 — resultado `PERMITIDO` si el acceso es autorizado, `DENEGADO` si la evaluación ABAC lo rechaza |
 | `MODIFICAR_EXPEDIENTE`            | Modificación directa de datos del expediente |
 | `CAMBIAR_ESTADO_EXPEDIENTE`       | RNF-01 (PATCH `/estado`) |
-| `REGISTRAR_ENTREVISTA`            | CU-11 |
-| `REGISTRAR_CONSENTIMIENTO`        | CU-12 |
+| `REGISTRAR_ENTREVISTA`            | CU-10 |
+| `REGISTRAR_CONSENTIMIENTO`        | CU-11 |
 | `REGISTRAR_REPORTE`               | CU-03 |
 | `MODIFICAR_REPORTE`               | CU-05 |
 | `ENVIAR_REPORTE`                  | CU-04 |
