@@ -25,6 +25,10 @@ El terapeuta consulta la lista de pacientes que tiene asignados y que cuentan co
 
 ### RF relacionados:
 - RF-01
+
+### Diagramas:
+- [Diagrama de flujo](../Diagramas/CU/Flujo.%20CU-01.png)
+- [Diagrama de secuencia](../Diagramas/CU/Secuencia.%20CU-01.png)
 ---
 ### CU-02: Acceder a expediente clínico
 
@@ -55,6 +59,11 @@ El terapeuta consulta el expediente de un paciente asignado y visualiza su infor
 
 ### RF relacionados:
 - RF-02
+
+### Diagramas:
+- [Diagrama de flujo](../Diagramas/CU/Flujo.%20CU-02.png)
+- [Diagrama de secuencia](../Diagramas/CU/Secuencia.%20CU-02.png)
+
 ---
 
 ### CU-03: Registrar reporte de sesión
@@ -87,6 +96,10 @@ El terapeuta registra un reporte de sesión dentro del expediente de un paciente
 
 ### RF relacionados:
 - RF-03
+
+### Diagramas:
+- [Diagrama de flujo](../Diagramas/CU/Flujo.%20CU-03.png)
+- [Diagrama de secuencia](../Diagramas/CU/Secuencia.%20CU-03.png)
 ---
 
 ### CU-04: Enviar reporte a revisión
@@ -113,6 +126,10 @@ El terapeuta envía un reporte propio al supervisor correspondiente para su revi
 
 ### RF relacionados:
 - RF-04
+
+### Diagramas:
+- [Diagrama de flujo](../Diagramas/CU/Flujo.%20CU-04.png)
+- [Diagrama de secuencia](../Diagramas/CU/Secuencia.%20CU-04.png)
 ---
 
 ### CU-05: Modificar reporte rechazado
@@ -145,6 +162,10 @@ El terapeuta corrige un reporte que previamente fue rechazado por el supervisor 
 
 ### RF relacionados:
 - RF-05
+
+### Diagramas:
+- [Diagrama de flujo](../Diagramas/CU/Flujo.%20CU-05.png)
+- [Diagrama de secuencia](../Diagramas/CU/Secuencia.%20CU-05.png)
 
 ## Actor: Supervisor
 
