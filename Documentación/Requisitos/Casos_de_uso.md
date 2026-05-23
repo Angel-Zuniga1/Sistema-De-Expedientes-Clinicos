@@ -268,7 +268,7 @@ El supervisor rechaza un reporte de sesión y registra comentarios para que el t
 ---
 ## Actor: Administrador
 
-### CU-11: Registrar entrevista socioeconómica
+### CU-10: Registrar entrevista socioeconómica
 
 ### Descripción:
 Permite al administrador registrar por primera vez la información correspondiente a la entrevista socioeconómica de un paciente.
@@ -294,7 +294,7 @@ Permite al administrador registrar por primera vez la información correspondien
 ### RF relacionados:
 - RF-10
 ---
-### CU-12: Actualizar entrevista socioeconómica
+### CU-11: Actualizar entrevista socioeconómica
 
 ### Descripción:
 Permite al administrador modificar una entrevista socioeconómica ya existente dentro de un expediente.
@@ -321,7 +321,7 @@ Permite al administrador modificar una entrevista socioeconómica ya existente d
 ### RF relacionados:
 - RF-10
 ---
-### CU-13: Registrar consentimiento informado
+### CU-12: Registrar consentimiento informado
 
 ### Descripción:
 Permite al administrador registrar por primera vez la información correspondiente al consentimiento informado firmado por el paciente.
@@ -347,7 +347,7 @@ Permite al administrador registrar por primera vez la información correspondien
 ### RF relacionados:
 - RF-11
 ---
-### CU-14: Actualizar consentimiento informado
+### CU-13: Actualizar consentimiento informado
 
 ### Descripción:
 Permite al administrador modificar un consentimiento informado ya existente dentro de un expediente.
@@ -374,7 +374,7 @@ Permite al administrador modificar un consentimiento informado ya existente dent
 ### RF relacionados:
 - RF-11
 ---
-### CU-16: Consultar expedientes clínicos y documentos pendientes
+### CU-14: Consultar expedientes clínicos y documentos pendientes
 
 ### Descripción:
 Permite al administrador revisar el listado general de expedientes clínicos y detectar cuáles requieren documentos pendientes.
@@ -403,7 +403,7 @@ Permite al administrador revisar el listado general de expedientes clínicos y d
 - RF-10
 - RF-11
 ---
-### CU-17: Consultar terapeutas
+### CU-15: Consultar terapeutas
 
 ### Descripción:
 Permite al administrador consultar el listado general de terapeutas registrados en el sistema.
@@ -427,7 +427,7 @@ Permite al administrador consultar el listado general de terapeutas registrados 
 ### RF relacionados:
 - RF-09
 ---
-### CU-18: Consultar supervisores
+### CU-16: Consultar supervisores
 
 ### Descripción:
 Permite al administrador consultar el listado general de supervisores registrados en el sistema.
@@ -451,7 +451,7 @@ Permite al administrador consultar el listado general de supervisores registrado
 ### RF relacionados:
 - RF-09
 ---
-### CU-19: Consultar registros de auditoría
+### CU-17: Consultar registros de auditoría
 
 ### Descripción:
 El administrador consulta el historial de eventos registrados por el sistema de auditoría.
@@ -500,12 +500,12 @@ El administrador consulta el historial de eventos registrados por el sistema de 
 | CU-07 | Supervisor | RF-07 |
 | CU-08 | Supervisor | RF-08 |
 | CU-09 | Supervisor | RF-08 |
+| CU-10 | Administrador | RF-10 |
 | CU-11 | Administrador | RF-10 |
-| CU-12 | Administrador | RF-10 |
+| CU-12 | Administrador | RF-11 |
 | CU-13 | Administrador | RF-11 |
-| CU-14 | Administrador | RF-11 |
-| CU-16 | Administrador | RF-09 / RF-10 / RF-11 |
-| CU-17 | Administrador | RF-09 |
-| CU-18 | Administrador | RF-09 |
-| CU-19 | Administrador | RF-12 |
+| CU-14 | Administrador | RF-09 / RF-10 / RF-11 |
+| CU-15 | Administrador | RF-09 |
+| CU-16 | Administrador | RF-09 |
+| CU-17 | Administrador | RF-12 |
 
