@@ -104,3 +104,17 @@ Hereda de: Documento
 | lugarProcedencia    | String        | Área geográfica de residencia del paciente | Máximo 100 caracteres y Debe existir |
 | vivienda            | String        | Lugar físico donde habita el paciente y su familia, incluyendo características físicas | Máximo 1000 caracteres |
 | estadoSaludFamiliar | String        | Número de enfermos crónicos en la familia al momento de la evaluación | Valor no mayor a 50 y Debe existir |
+
+### RegistroAuditoria
+Registro inmutable generado automáticamente por el backend. Solo acepta operaciones de inserción.
+
+| Nombre      | Tipo de dato  | Descripción   | Restricciones |
+| ----------- |:-------------:| ------------- |:-------------:|
+| idLog       | Long          | Identificador único del registro de auditoría | Único. Autoincremental. NOT NULL |
+| idUsuario   | Long          | Referencia al usuario que realizó la acción | FK hacia Usuario. NOT NULL |
+| rolUsuario  | ENUM          | Rol del usuario al momento del evento | Valores: `TERAPEUTA`, `SUPERVISOR`, `ADMINISTRADOR`. NOT NULL |
+| accion      | ENUM          | Tipo de operación realizada | Valores: `CONSULTAR_EXPEDIENTE`, `MODIFICAR_EXPEDIENTE`, `CAMBIAR_ESTADO_EXPEDIENTE`, `REGISTRAR_ENTREVISTA`, `REGISTRAR_CONSENTIMIENTO`, `CONSULTAR_EXPEDIENTES_PENDIENTES`, `REGISTRAR_REPORTE`, `MODIFICAR_REPORTE`, `ENVIAR_REPORTE`, `APROBAR_REPORTE`, `RECHAZAR_REPORTE`, `CONSULTAR_TERAPEUTAS`, `CONSULTAR_SUPERVISORES`. NOT NULL |
+| recurso     | String        | Nombre de la entidad afectada (ej. `Expediente`, `ReporteSesion`) | NOT NULL |
+| idRecurso   | String        | Identificador del recurso afectado | NOT NULL |
+| fechaHora   | DateTime      | Fecha y hora del evento en UTC | Formato ISO 8601. NOT NULL |
+| resultado   | ENUM          | Resultado de la operación evaluada | Valores: `PERMITIDO`, `DENEGADO`. NOT NULL |
