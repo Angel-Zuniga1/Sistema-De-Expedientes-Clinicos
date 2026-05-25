@@ -129,3 +129,6 @@ Controller → Service → Repository → Base de datos
 ```
 
 En este flujo, cada solicitud es delegada por el Controller al Service, donde se evalúan las reglas de autorización ABAC y las reglas de negocio antes de interactuar con la base de datos. El Service también genera el registro de auditoría correspondiente (con resultado `PERMITIDO` o `DENEGADO`) que se persiste a través del Repository de auditoría, garantizando consistencia, seguridad y trazabilidad en cada operación.
+
+## Diagrama de arquitectura
+![Diagrama de arquitectura](../Diagramas/Arquitectura.png)
